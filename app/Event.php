@@ -17,10 +17,10 @@ class Event extends Model
         'description',
         'organizer',
         'gunStart_date',
-        'gunStart_time',
+        'status',
+        'userfile',
+        'org',
         'venue',
-        'registration_deadline',
-        'status'
 	];
 
     public function organizer()

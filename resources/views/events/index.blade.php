@@ -4,9 +4,11 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <button type="button" rel="tooltip" title="Add event" class="btn btn-info btn-simple btn-lg" onclick="{{url('/events/create')}}">
+                <a href="{{ url('/events/create') }}">
+                <button type="button" rel="tooltip" title="Add event" class="btn btn-info btn-simple btn-lg">
                     <i class="pe-7s-plus">Add Event</i>
                 </button>
+                </a>
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">

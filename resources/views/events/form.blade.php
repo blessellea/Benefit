@@ -11,8 +11,8 @@
 @endif
 
 <div class="form-group">
-    <label for="event_name">Event Name:</label>
-    <input type="text" name="event_name" id="event_name" class="form-control" value="{{ old('event_name') }}">
+    <label for="name">Event Name:</label>
+    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
 </div>
 
 <div class="form-group">
@@ -21,34 +21,31 @@
 </div>
 
 <div class="form-group">
-    <label for="destination">Where:</label>
+    <label for="destination">Venue:</label>
     <input type="text" name="destination" id="destination" class="form-control" value="{{ old('destination') }}">
 </div>
 
 <div class="form-group">
-    <label for="gun_start">Gun Start:</label>
-    <input type="text" name="gun_start" id="gun_start" class="form-control" value="{{ old('gun_start') }}">
+    <label for="gunStart_time">Time:</label>
+    <input type="time" name="gunStart_time" id="gunStart_time" class="form-control" value="{{ old('gunStart_time') }}">
 </div>
 
 <div class="form-group">
-    <label for="date">When:</label>
-    <input type="text" name="date" id="date" class="form-control" value="{{ old('date') }}">
+    <label for="date">Date:</label>
+    <input type="date" name="gunStart_date" id="gunStart_date" class="form-control" value="{{ old('gunStart_date') }}">
+</div>
+
+
+<div class="form-group">
+    <label for="file">image :</label>
+    <input type="file" name="userfile" id="userfile" class="form-control" value="{{ old('userfile') }}">
 </div>
 
 <div class="form-group">
-    <label for="sponsors">Sponsor :</label>
-    <input type="text" name="sponsors" id="sponsors" class="form-control" value="{{ old('sponsors') }}">
+    <label for="organizer"></label>
+    <input type="hidden" name="organizer" id="organizer" class="form-control" value="{{Auth::guard('organizer')->user()->name}}">
 </div>
 
-<div class="form-group">
-    <label for="category">Category :</label>
-    <input type="text" name="category" id="category" class="form-control" value="{{ old('category') }}">
-</div>
-
-<div class="form-group">
-    <label for="price">Price :</label>
-    <input type="text" name="price" id="price" class="form-control" value="{{ old('price') }}">
-</div>
 
 <div class="form-group">
     <button type="submit" class="btn btn-primary">Save</button>

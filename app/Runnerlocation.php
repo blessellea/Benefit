@@ -15,7 +15,8 @@ class Runnerlocation extends Model
         'event_id',
         'user_id',
         'lng',
-        'lat'
+        'lat',
+        'flag'
     ];
 
 //    public function getBeneNameAttribute('id')

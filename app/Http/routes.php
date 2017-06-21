@@ -20,6 +20,8 @@ Route::get('/save', function () {
 
 Route::group(['middleware' => ['web']], function(){
     Route::auth();
+    Route::get('login', 'Auth/AuthController@showLogin');
+    Route::post('check','Auth/AuthController@checkLogin');
     Route::get('/home', 'HomeController@index');
 });
 
@@ -100,7 +102,10 @@ Route::get('/notifications', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
-Route::get('/tablelist', function () {
+Route::get('/viewLocation', function () {
+    return view('table');
+});
+Route::get('/viewLocation/{id}', function () {
     return view('table');
 });
 Route::get('/profile', function () {

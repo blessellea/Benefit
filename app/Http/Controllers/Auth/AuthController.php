@@ -5,6 +5,7 @@ namespace app\Http\Controllers\Auth;
 use app\User;
 use Validator;
 use app\Http\Controllers\Controller;
+
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -40,6 +41,7 @@ class AuthController extends Controller
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
+
 
     /**
      * Get a validator for an incoming registration request.

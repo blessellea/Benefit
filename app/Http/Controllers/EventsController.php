@@ -6,6 +6,8 @@ use app\Event;
 use app\EventKm;
 use app\Http\Requests\Request;
 use app\Joinevent;
+use app\Organizer;
+
 
 class EventsController extends Controller
 {
@@ -36,7 +38,7 @@ class EventsController extends Controller
         Joinevent::create(
             ['user_id' => $user, 'event_cat' => $id]
         );
-        return redirect('/ ');
+        return redirect('/');
 
     }
 
@@ -78,7 +80,9 @@ class EventsController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        $org = Organizer::all();
+
+        return view('events.create', compact('org'));
     }
 
     /**
@@ -89,8 +93,25 @@ class EventsController extends Controller
      */
     public function store(eventRequest $request)
     {
-        Event::create($request->all());
+        $image = new Event;
+        $file = $request->file('userfile');
+        $destination_path = 'uploads/';
+        $filename = str_random(6).'_'.$file->getClientOriginalName();
+        $file->move($destination_path, $filename);
+        $fileuser =  $image->file = $destination_path . $filename;
+
+        $event = new Event;
+        $event->name          = $request->name;
+        $event->description   = $request->description;
+        $event->organizer     = $request->organizer;
+        $event->gunStart_date = $request->gunStart_date;
+        $event->userfile      = $fileuser;
+        $event->gunStart_time = $request->gunStart_time;
+        $event->venue         = $request->destination;
+        $event->save();
+
         return redirect('events');
+
     }
 
     /**

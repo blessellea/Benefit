@@ -29,6 +29,6 @@ class JoinController extends Controller
     {
         Eventsrunned::create($request->all());
 
-        return redirect('events');
+        return redirect('/');
     }
 }

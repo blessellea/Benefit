@@ -13,7 +13,8 @@
     </div>
 <br>
     <div class="wizard-navigation">
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+        {{--<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">--}}
+            {!! Form::open(array('url' => 'admin/check', 'id' => 'login')) !!}
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -63,7 +64,8 @@
                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
             </div>
         </div>
-        </form>
+        {!! Form::close() !!}
+        {{--</form>--}}
     </div>
 
 

@@ -25,13 +25,12 @@ class eventRequest extends Request
     {
         return [
 //            'event_id' => 'required',
-            'name' => 'required',
-            'description' => 'required',
-            'organizer' => 'required',
-            'gunStart_date' => 'required',
-            'registration_deadline' => 'required',
-            'status' => 'required'
-
+//            'name' => 'required',
+//            'description' => 'required',
+//            'organizer' => 'required',
+//            'gunStart_date' => 'required',
+//            'registration_deadline' => 'required',
+//            'status' => 'required'
         ];
     }
 }

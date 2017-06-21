@@ -28,33 +28,61 @@ class ApiBenefitController extends Controller
 
     public function viewEvents()
     {
-//        $event = Event::where('status', 'Active')->get();
-//        $category = EventKm::all();
-//        $event = DB::table('events')->leftjoin('events','events.event_id','=',
-//            'eventkm.event')->select('events.event_id',
-//                                     'events.name','eventkm.color')->where('status', 'Active')->get();
-        $events = DB::table('events')
-            ->leftJoin('eventkm', 'events.event_id', '=', 'eventkm.event')
-            ->where('status', 'Active')->get();
+        $events = Event::where('status', 'Active')->get();
+//        $cat = EventKm::all();
+//        $events =
+//            Event::where('status', 'Active')
+//            ->Join('eventkm', 'events.event_id', '=', 'eventkm.event')
+//            ->select('events.*')
+//            ->get();
+
         return $events;
     }
+
     //    RunnerLocation
     public function postLocation(locationRequest $request)
     {
-        $location =  runnerlocation::create($request->all());
+        $event_id = $request->event_id;
+        $user_id = $request->user_id;
+
+        $aw = Runnerlocation::where('event_id', $event_id)->where('user_id', $user_id)->count();
+
+       if($aw == 1 ){
+           Runnerlocation::where('event_id', $event_id)->where('user_id', $user_id)->update([
+                'event_id' => $event_id,
+                'user_id' => $user_id,
+                'lat' => $request->lat,
+                'lng' => $request->lng
+            ]);
+            $location = 9;
+        }
+        elseif($aw == 0 ){
+            $location =  Runnerlocation::create($request->all());
+        }
+
         return  $location;
     }
 
     public function location($id)
     {
-        $location = runnerlocation::where('event_id', $id)->get();
-//        $location = runnerlocation::findOrFail($id);
+//        $location = runnerlocation::where('event_id', $id)->get();
+        $location = runnerlocation::select('events.name','users.fname','runnerlocation.lat','runnerlocation.lng')
+            ->join('events', 'runnerlocation.event_id', '=', 'events.event_id')
+            ->join('users', 'runnerlocation.user_id', '=', 'users.id')
+            ->where('runnerlocation.event_id', $id)->get();
+
         return $location;
     }
 
     public function viewLocation()
     {
-        $location = runnerlocation::all();
+//        $location = runnerlocation::all();
+        $location = Runnerlocation::select('events.name','users.fname','runnerlocation.lat','runnerlocation.lng')
+            ->join('events', 'runnerlocation.event_id', '=', 'events.event_id')
+            ->join('users', 'runnerlocation.user_id', '=', 'users.id')
+//            ->select( 'events.name','users.fname','users.lname','runnerlocation.lat','runnerlocation.lng')
+            ->get();
+
         return $location;
     }
 
@@ -151,4 +179,12 @@ class ApiBenefitController extends Controller
         // $Runner =
         return "Runner is deleted";
     }
+
+    public function login(userRequest $request)
+    {
+        $runner = User::findOrFail($request->all());
+//        if($runner)
+        return $runner;
+    }
 }
+
